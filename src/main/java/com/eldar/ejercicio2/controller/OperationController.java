@@ -18,8 +18,9 @@ public class OperationController {
         return "Para ver la operación, por favor, haga una petición POST a /operation";
     }
     @PostMapping("/operation")
-    public ResponseEntity<OperationResponse> operation( @RequestBody OperationRequest operationRequest) throws InvalidOperationException {
+    public ResponseEntity<OperationResponse> operation(@RequestBody OperationRequest operationRequest) throws InvalidOperationException {
         Operation operation = new Operation(operationRequest.getAmount(), operationRequest.getCard());
         return ResponseEntity.ok(new OperationResponse(operation.getCard().getBrand().getName(), operation.calculateTotalRate()));
     }
+
 }

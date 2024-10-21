@@ -1,10 +1,14 @@
 package com.eldar.ejercicio2.model;
 
+import com.eldar.ejercicio2.exceptions.InvalidOperationException;
+import lombok.Getter;
+
 import java.time.LocalDate;
 
 /**
  * Clase que representa una tarjeta de credito
  */
+@Getter
 public class Card {
     private String number;
     private String cardholder;
@@ -22,6 +26,10 @@ public class Card {
 
     public boolean isValid(){
         return LocalDate.now().isBefore(expirationDate);
+    }
+    public double getRateCard() {
+            return brand.calculateRateWithValidation();
+
     }
 
     @Override
@@ -41,33 +49,6 @@ public class Card {
         return "Las tarjetas son diferentes";
 
     }
-    public double calculateTotalRate(double amount)
-    {
-        if (amount < 0) {
-            throw new IllegalArgumentException("El monto no puede ser negativo");
-        }
-        return amount * (1 + brand.getCalculateRate().calculateRate(LocalDate.now()) / 100);
-    }
 
-    //getters
 
-    public String getNumber() {
-        return number;
-    }
-    public String getCardholder() {
-        return cardholder;
-    }
-    public void setCardholder(String cardholder) {
-        this.cardholder = cardholder;
-    }
-    public Brand getBrand() {
-        return brand;
-    }
-
-    public void setBrand(Brand brand) {
-        this.brand = brand;
-    }
-    public LocalDate getExpirationDate() {
-        return expirationDate;
-    }
 }

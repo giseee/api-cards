@@ -1,5 +1,8 @@
 package com.eldar.ejercicio2.dto;
 
+import lombok.Data;
+
+@Data
 public class OperationResponse {
     private String brand;
     private double rate;
@@ -8,22 +11,6 @@ public class OperationResponse {
     }
     public OperationResponse(String brand, double rate) {
         this.brand = brand;
-        this.rate = rate;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
         this.rate = rate;
     }
 

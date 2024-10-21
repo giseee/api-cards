@@ -19,22 +19,23 @@ public class Brand {
     }
 
     private void strategySelected(String name) {
-        switch (name) {
-            case "Visa" -> this.calculateRate = new Visa();
-            case "Amex" -> this.calculateRate = new Amex();
-            case "Nara" -> this.calculateRate = new Nara();
-        }
+            switch (name) {
+                case "Visa" -> this.calculateRate = new Visa();
+                case "Amex" -> this.calculateRate = new Amex();
+                case "Nara" -> this.calculateRate = new Nara();
+                default -> throw new IllegalArgumentException("La marca no es válida: " + name);
+            }
+    }
+    //es un template method
+
+    public double calculateRateWithValidation(){
+        double rate = calculateRate.calculateRate(LocalDate.now());
+        rate = this.validateRate(rate);
+        return rate;
     }
 
-    public double calculateRateWithValidation(LocalDate date) throws InvalidOperationException {
-        if (date == null) {
-            throw new IllegalArgumentException("La fecha no puede ser nula");
-        }
-        double rate = calculateRate.calculateRate(date);
-        if (rate < 0.3 || rate > 5) {
-            throw new InvalidOperationException("La tasa no es valida: " + rate);
-        }
-        return rate;
+    private double validateRate(double rate) {
+        return Math.min(Math.max(rate, 0.3), 5);
     }
 
     public String getName() {
@@ -43,5 +44,6 @@ public class Brand {
     public CalculateRate getCalculateRate() {
         return calculateRate;
     }
+
 
 }

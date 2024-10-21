@@ -3,6 +3,7 @@ package com.eldar.ejercicio2.model;
 
 import com.eldar.ejercicio2.exceptions.InvalidOperationException;
 
+
 public class Operation {
     private double amount;
     private Card card;
@@ -23,9 +24,8 @@ public class Operation {
         return "nombre: " + this.card.getBrand().getName() + " importe: " + this.amount;
     }
 
-    public double calculateTotalRate()
-    {
-        return card.calculateTotalRate(this.amount);
+    public double calculateTotalRate(){
+            return amount * (1 + card.getRateCard() / 100);
     }
 
     public Card getCard() {
